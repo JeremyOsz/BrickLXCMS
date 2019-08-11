@@ -44,7 +44,7 @@ const Navbar = class extends React.Component {
         <div className="container">
           <div className="navbar-brand">
             {/* Hamburger menu */}
-            {window.innerWidth <= 1024 ? (
+            {typeof window !== "undefined" && window.innerWidth <= 1024 ? (
               <Link to="/" className="navbar-item" title="Logo">
                 <img src={logoMobile} alt="BrickLX" />
               </Link>
@@ -70,7 +70,7 @@ const Navbar = class extends React.Component {
               <Link className="navbar-item" to="/products">
                 Projects
               </Link>
-              {window.innerWidth > 1024 ? (
+              {typeof window !== "undefined" && window.innerWidth > 1024 ? (
                 <Link to="/" className="navbar-item" title="Logo">
                   <img src={logo} alt="BrickLX" />
                 </Link>
