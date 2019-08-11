@@ -10,6 +10,14 @@ const Background = styled.div`
   height: 100vh;
   width: auto;
   display: block;
+  background-image: ${props =>
+    `url("
+      ${
+        props.image.childImageSharp
+          ? props.image.childImageSharp.fluid.src
+          : props.image
+      }
+    ")`};
 `;
 
 const HeroText = styled.div`
@@ -42,14 +50,7 @@ const HeroText = styled.div`
 
 export const IndexPageTemplate = ({ image, title, subheading, heading }) => (
   <div>
-    <Background
-      className="margin-top-0"
-      style={{
-        backgroundImage: `url(${
-          image.childImageSharp ? image.childImageSharp.fluid.src : image
-        })`
-      }}
-    >
+    <Background image={image} className="margin-top-0">
       <HeroText>
         <h2>{title}</h2>
         <h1 className="has-text-weight-bold is-size-3-mobile is-size-2-tablet is-size-1-widescreen">
