@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "gatsby";
 import github from "../img/github-icon.svg";
 import logo from "../img/900x900-Logo.png";
+import logoMobile from "../img/1400x280-Logo.png";
 import styled from "styled-components";
 
 const Navbar = class extends React.Component {
@@ -43,6 +44,11 @@ const Navbar = class extends React.Component {
         <div className="container">
           <div className="navbar-brand">
             {/* Hamburger menu */}
+            {window.innerWidth <= 1024 ? (
+              <Link to="/" className="navbar-item" title="Logo">
+                <img src={logoMobile} alt="BrickLX" />
+              </Link>
+            ) : null}
             <div
               className={`navbar-burger burger ${this.state.navBarActiveClass}`}
               data-target="navMenu"
@@ -64,27 +70,18 @@ const Navbar = class extends React.Component {
               <Link className="navbar-item" to="/products">
                 Projects
               </Link>
-              <Link to="/" className="navbar-item" title="Logo">
-                <img src={logo} alt="Kaldi" style={{ width: "88px" }} />
-              </Link>
+              {window.innerWidth > 1024 ? (
+                <Link to="/" className="navbar-item" title="Logo">
+                  <img src={logo} alt="BrickLX" />
+                </Link>
+              ) : null}
+
               <Link className="navbar-item" to="/blog">
                 News
               </Link>
               <Link className="navbar-item" to="/contact">
                 Contact
               </Link>
-            </div>
-            <div className="navbar-end has-text-centered">
-              <a
-                className="navbar-item"
-                href="https://github.com/netlify-templates/gatsby-starter-netlify-cms"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span className="icon">
-                  <img src={github} alt="Github" />
-                </span>
-              </a>
             </div>
           </div>
         </div>
