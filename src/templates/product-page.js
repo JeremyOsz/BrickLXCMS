@@ -1,12 +1,53 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { graphql } from 'gatsby'
-import Layout from '../components/Layout'
-import Features from '../components/Features'
-import Testimonials from '../components/Testimonials'
-import Pricing from '../components/Pricing'
-import PreviewCompatibleImage from '../components/PreviewCompatibleImage'
+import React from "react";
+import PropTypes from "prop-types";
+import { graphql } from "gatsby";
+import Layout from "../components/Layout";
+import styled from "styled-components";
+import Features from "../components/Features";
+import Testimonials from "../components/Testimonials";
+import Pricing from "../components/Pricing";
+import PreviewCompatibleImage from "../components/PreviewCompatibleImage";
 
+const Project = styled.div`
+  display: block;
+  position: relative;
+  background: red;
+  width: 23%;
+    object-fit: cover;
+    padding-top: 22%;
+    margin: 2rem auto;
+    border-radius: .5rem;
+    overflow: hidden;
+  > div {
+    position: absolute !important;
+    top:0;
+    left: 0;
+    right:0;
+    bottom:0;
+    h1{
+      display: inline-block;
+      width: max-content;
+      position: absolute;
+      bottom: 1rem;
+      left: 0;
+      right: 0;
+      margin: auto;
+      padding: 0 5px;
+      background: rgba(0, 0, 0, 0.5);;
+    }
+    .gatsby-image-wrapper{
+      height:100%;
+      width:100%;
+    }
+  }
+}
+`;
+const ProjectsStyled = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  padding-top: 4rem;
+`;
 export const ProductPageTemplate = ({
   image,
   title,
@@ -16,10 +57,42 @@ export const ProductPageTemplate = ({
   main,
   testimonials,
   fullImage,
-  pricing,
+  pricing
 }) => (
   <div className="content">
-    <div
+    <ProjectsStyled>
+      <Project>
+        <div>
+          <PreviewCompatibleImage imageInfo={main.image1} />
+          <h1>Lorem Ipsum</h1>
+        </div>
+      </Project>
+      <Project>
+        <div>
+          <PreviewCompatibleImage imageInfo={main.image1} />
+          <h1>Lorem Ipsum</h1>
+        </div>
+      </Project>
+      <Project>
+        <div>
+          <PreviewCompatibleImage imageInfo={main.image1} />
+          <h1>Lorem Ipsum</h1>
+        </div>
+      </Project>
+      <Project>
+        <div>
+          <PreviewCompatibleImage imageInfo={main.image1} />
+          <h1>Lorem Ipsum</h1>
+        </div>
+      </Project>
+      <Project>
+        <div>
+          <PreviewCompatibleImage imageInfo={main.image1} />
+          <h1>Lorem Ipsum</h1>
+        </div>
+      </Project>
+    </ProjectsStyled>
+    {/* <div
       className="full-width-image-container margin-top-0"
       style={{
         backgroundImage: `url(${
@@ -100,9 +173,9 @@ export const ProductPageTemplate = ({
           </div>
         </div>
       </div>
-    </section>
+    </section> */}
   </div>
-)
+);
 
 ProductPageTemplate.propTypes = {
   image: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
@@ -110,26 +183,26 @@ ProductPageTemplate.propTypes = {
   heading: PropTypes.string,
   description: PropTypes.string,
   intro: PropTypes.shape({
-    blurbs: PropTypes.array,
+    blurbs: PropTypes.array
   }),
   main: PropTypes.shape({
     heading: PropTypes.string,
     description: PropTypes.string,
     image1: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     image2: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    image3: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+    image3: PropTypes.oneOfType([PropTypes.object, PropTypes.string])
   }),
   testimonials: PropTypes.array,
   fullImage: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   pricing: PropTypes.shape({
     heading: PropTypes.string,
     description: PropTypes.string,
-    plans: PropTypes.array,
-  }),
-}
+    plans: PropTypes.array
+  })
+};
 
 const ProductPage = ({ data }) => {
-  const { frontmatter } = data.markdownRemark
+  const { frontmatter } = data.markdownRemark;
 
   return (
     <Layout>
@@ -145,18 +218,18 @@ const ProductPage = ({ data }) => {
         pricing={frontmatter.pricing}
       />
     </Layout>
-  )
-}
+  );
+};
 
 ProductPage.propTypes = {
   data: PropTypes.shape({
     markdownRemark: PropTypes.shape({
-      frontmatter: PropTypes.object,
-    }),
-  }),
-}
+      frontmatter: PropTypes.object
+    })
+  })
+};
 
-export default ProductPage
+export default ProductPage;
 
 export const productPageQuery = graphql`
   query ProductPage($id: String!) {
@@ -244,4 +317,4 @@ export const productPageQuery = graphql`
       }
     }
   }
-`
+`;
