@@ -5,6 +5,35 @@ import logo from "../img/900x900-Logo.png";
 import logoMobile from "../img/1400x280-Logo.png";
 import styled from "styled-components";
 
+const size = {
+  mobileS: "320px",
+  mobileM: "375px",
+  mobileL: "425px",
+  tablet: "768px",
+  laptop: "1024px",
+  laptopL: "1440px",
+  desktop: "2560px"
+};
+
+const Logo = styled.img`
+  &.logo-mobile {
+    @media (min-width: ${size.laptop}) {
+      display: none;
+    }
+  }
+  &.logo-desktop {
+    @media (max-width: ${size.laptop}) {
+      display: none;
+    }
+  }
+`;
+const NavBarStyled = styled.nav`
+  .navbar-item.desktop {
+    @media (max-width: ${size.laptop}) {
+      display: none;
+    }
+  }
+`;
 const Navbar = class extends React.Component {
   constructor(props) {
     super(props);
@@ -36,7 +65,7 @@ const Navbar = class extends React.Component {
 
   render() {
     return (
-      <nav
+      <NavBarStyled
         className="navbar is-transparent"
         role="navigation"
         aria-label="main-navigation"
@@ -46,7 +75,7 @@ const Navbar = class extends React.Component {
             {/* Hamburger menu */}
             {typeof window !== "undefined" && window.innerWidth <= 1024 ? (
               <Link to="/" className="navbar-item" title="Logo">
-                <img src={logoMobile} alt="BrickLX" />
+                <Logo src={logoMobile} alt="BrickLX" className="logo-mobile" />
               </Link>
             ) : null}
             <div
@@ -67,12 +96,12 @@ const Navbar = class extends React.Component {
               <Link className="navbar-item" to="/about">
                 About
               </Link>
-              <Link className="navbar-item" to="/products">
+              <Link className="navbar-item" to="/projects">
                 Projects
               </Link>
-              {typeof window !== "undefined" && window.innerWidth > 1024 ? (
-                <Link to="/" className="navbar-item" title="Logo">
-                  <img src={logo} alt="BrickLX" />
+              {typeof window !== "undefined" ? (
+                <Link to="/" className="navbar-item desktop" title="Logo">
+                  <Logo src={logo} alt="BrickLX" className="logo-desktop" />
                 </Link>
               ) : null}
 
@@ -85,7 +114,7 @@ const Navbar = class extends React.Component {
             </div>
           </div>
         </div>
-      </nav>
+      </NavBarStyled>
     );
   }
 };
