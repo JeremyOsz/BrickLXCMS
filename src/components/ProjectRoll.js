@@ -4,9 +4,9 @@ import PropTypes from "prop-types";
 import { Link, graphql, StaticQuery } from "gatsby";
 import PreviewCompatibleImage from "./PreviewCompatibleImage";
 import styled from "styled-components";
-import Blog from "./Tile";
+import Project from "./Tile";
 
-const BlogRollStyled = styled.div`
+const ProjectRollStyled = styled.div`
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -15,16 +15,16 @@ const BlogRollStyled = styled.div`
   }
 `;
 
-class BlogRoll extends React.Component {
+class ProjRoll extends React.Component {
   render() {
     const { data } = this.props;
     const { edges: posts } = data.allMarkdownRemark;
 
     return (
-      <BlogRollStyled>
+      <ProjectRollStyled>
         {posts &&
           posts.map(({ node: post }) => (
-            <Blog key={post.id}>
+            <Project key={post.id}>
               <div>
                 <Link to={post.fields.slug}>
                   <PreviewCompatibleImage
@@ -36,14 +36,14 @@ class BlogRoll extends React.Component {
                   <h1>{post.frontmatter.title}</h1>
                 </Link>
               </div>
-            </Blog>
+            </Project>
           ))}
-      </BlogRollStyled>
+      </ProjectRollStyled>
     );
   }
 }
 
-BlogRoll.propTypes = {
+ProjRoll.propTypes = {
   data: PropTypes.shape({
     allMarkdownRemark: PropTypes.shape({
       edges: PropTypes.array
@@ -54,10 +54,10 @@ BlogRoll.propTypes = {
 export default () => (
   <StaticQuery
     query={graphql`
-      query BlogRollQuery {
+      query ProjRollQuery {
         allMarkdownRemark(
           sort: { order: DESC, fields: [frontmatter___date] }
-          filter: { frontmatter: { templateKey: { eq: "blog-post" } } }
+          filter: { frontmatter: { templateKey: { eq: "project" } } }
         ) {
           edges {
             node {
@@ -70,7 +70,6 @@ export default () => (
                 title
                 templateKey
                 date(formatString: "MMMM DD, YYYY")
-                featuredpost
                 featuredimage {
                   childImageSharp {
                     fluid(maxWidth: 120, quality: 100) {
@@ -84,6 +83,6 @@ export default () => (
         }
       }
     `}
-    render={(data, count) => <BlogRoll data={data} count={count} />}
+    render={(data, count) => <ProjRoll data={data} count={count} />}
   />
 );
