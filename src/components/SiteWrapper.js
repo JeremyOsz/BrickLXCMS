@@ -24,7 +24,9 @@ const SiteWrapper = styled.div`
     color: #fff;
   }
 
-  min-height: 100vh;
+  height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
   background-color: #000;
   color: #fff;
 
@@ -51,16 +53,19 @@ const SiteWrapper = styled.div`
         font-size: 2.25rem;
       }
     }
-    &-menu.is-active {
-      display: flex;
-      height: -webkit-fill-available;
-      justify-content: center;
-      align-items: center;
-      color: #fff;
-      background: #383838f5;
-      position: fixed;
-      width: 100%;
+    &-menu {
+      &.is-active {
+        display: flex;
+        height: -webkit-fill-available;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        background: #383838f5;
+        position: fixed;
+        width: 100%;
+      }
     }
+
     &-burger {
       color: #fff;
       zoom: 1.5;
@@ -76,6 +81,7 @@ const SiteWrapper = styled.div`
       font-weight: 600;
       color: #fff;
       text-align: center;
+      padding: 0;
       :hover {
         color: red;
       }
@@ -105,7 +111,7 @@ const SiteWrapper = styled.div`
     }
     .navbar .navbar-menu {
       min-width: 180px;
-      border-right: 2px solid grey;
+      border-right: 1px solid #80808063;
     }
     .navbar-item {
       display: flex;
