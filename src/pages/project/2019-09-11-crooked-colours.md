@@ -5,11 +5,11 @@ date: 2019-09-11T11:30:54.550Z
 description: Blah Blah Blah
 featuredpost: false
 featuredimage: /img/products-grid2.jpg
-galeryImages:
-  - caption: gewagw
+galleryImages:
+  - caption: ewagewgweg
     image: /img/blog-index.jpg
-  - caption: egaewg
-    image: /img/apple-touch-icon.png
+  - caption: ewgewagewag
+    image: /img/blog-index.jpg
 tags:
   - Theo
 ---
