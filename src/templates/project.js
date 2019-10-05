@@ -68,7 +68,7 @@ export const ProjPostTemplate = ({
 
   return (
     <section className="section">
-      {console.log(this)}
+      {console.log(galleryImages)}
       {helmet || ""}
       <div className="container content">
         <div className="columns">
@@ -161,8 +161,8 @@ export const pageQuery = graphql`
         description
         tags
         galleryImages {
-          caption
           image
+          caption
         }
       }
     }
