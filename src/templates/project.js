@@ -11,7 +11,7 @@ import "react-image-gallery/styles/scss/image-gallery.scss";
 
 const FalseModal = styled.div`
   height: 92vh;
-  overflow: hidden;
+  overflow: auto;
   width: 95%;
   background-color: rgba(255, 255, 255, 0.2);
   margin-left: 2rem;
@@ -44,15 +44,31 @@ export const ProjPostTemplate = ({
   helmet
 }) => {
   const PostContent = contentComponent || Content;
-  const images = galleryImages.map(img => {
-    return {
-      original: img.image.childImageSharp.fluid.src,
-      thumbnail: img.image.childImageSharp.fluid.src
-    };
-  });
+  const images = galleryImages
+    ? galleryImages.map(img => {
+        return {
+          original: img.image,
+          thumbnail: img.image
+        };
+      })
+    : [
+        ({
+          original: "https://picsum.photos/id/1018/1000/600/",
+          thumbnail: "https://picsum.photos/id/1018/250/150/"
+        },
+        {
+          original: "https://picsum.photos/id/1015/1000/600/",
+          thumbnail: "https://picsum.photos/id/1015/250/150/"
+        },
+        {
+          original: "https://picsum.photos/id/1019/1000/600/",
+          thumbnail: "https://picsum.photos/id/1019/250/150/"
+        })
+      ];
 
   return (
     <section className="section">
+      {console.log(this)}
       {helmet || ""}
       <div className="container content">
         <div className="columns">
@@ -146,13 +162,7 @@ export const pageQuery = graphql`
         tags
         galleryImages {
           caption
-          image {
-            childImageSharp {
-              fluid(maxWidth: 2048, quality: 100) {
-                ...GatsbyImageSharpFluid
-              }
-            }
-          }
+          image
         }
       }
     }
