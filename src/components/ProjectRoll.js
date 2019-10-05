@@ -33,7 +33,10 @@ class ProjRoll extends React.Component {
                       alt: `featured image thumbnail for post ${post.title}`
                     }}
                   />
-                  <h1>{post.frontmatter.title}</h1>
+                  <h1>
+                    {post.frontmatter.title}
+                    {console.log(data)}
+                  </h1>
                 </Link>
               </div>
             </Project>
