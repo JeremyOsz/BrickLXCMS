@@ -1,6 +1,24 @@
 import React from "react";
 import { navigate } from "gatsby-link";
 import Layout from "../../components/Layout";
+import styled from "styled-components";
+
+const ContactBox = styled.div`
+  padding: 3rem 1.5rem;
+
+  &.section {
+    @media screen and (max-width: 1025px) {
+      padding: 1.5rem 1.5rem;
+    }
+  }
+  .container {
+    padding: 1rem 1.5rem;
+    background: #968e8e52;
+    border-radius: 0px;
+    box-shadow: -2px 4px 60px -2px #ff000066;
+    width: 83.33333%;
+  }
+`;
 
 function encode(data) {
   return Object.keys(data)
@@ -36,7 +54,7 @@ export default class Index extends React.Component {
   render() {
     return (
       <Layout page="contact">
-        <section className="section">
+        <ContactBox className="section">
           <div className="container">
             <div className="content">
               <h1>Contact</h1>
@@ -108,7 +126,7 @@ export default class Index extends React.Component {
               </form>
             </div>
           </div>
-        </section>
+        </ContactBox>
       </Layout>
     );
   }

@@ -5,7 +5,7 @@ import Helmet from "react-helmet";
 import { graphql, Link } from "gatsby";
 import Layout from "../components/Layout";
 import Content, { HTMLContent } from "../components/Content";
-import FalseModal from "../components/Content";
+import FalseModal from "../components/FalseModal";
 import styled from "styled-components";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/scss/image-gallery.scss";
@@ -28,7 +28,6 @@ export const BlogPostTemplate = ({
     slideClicked.contains("clicked")
       ? slideClicked.remove("clicked")
       : slideClicked.add("clicked");
-    console.log(slideClicked.contains("clicked"));
   };
   const PostContent = contentComponent || Content;
   const images = galleryImages
@@ -56,12 +55,10 @@ export const BlogPostTemplate = ({
 
   return (
     <section className="section">
-      {console.log(galleryImages)}
       {helmet || ""}
       <div className="container content">
         <div className="columns">
           <FalseModal class="falseModal">
-            {console.log(galleryImages)}
             <ImageGallery
               className={"image-gallery"}
               items={images}

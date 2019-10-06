@@ -8,10 +8,16 @@ import Blog from "./Tile";
 
 const BlogRollStyled = styled.div`
   display: flex;
+  position: relative;
   flex-wrap: wrap;
   flex-direction: row;
+  margin: 1rem 1.5rem;
+  background: #968e8e52;
+  border-radius: 0px;
+  box-shadow: -2px 4px 60px -2px #ff000066;
   @media (min-width: 1025px) {
-    padding: 4rem 1rem;
+    margin: 3rem 3rem;
+    padding: 2rem 2rem;
   }
 `;
 

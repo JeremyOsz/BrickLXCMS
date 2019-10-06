@@ -33,7 +33,7 @@ const NavBarStyled = styled.nav`
     background: #a0a0a054;
   } */
   .navbar-item.desktop {
-    @media (max-width: ${size.laptop}) {
+    @media (max-width: ${size.tablet}) {
       display: none;
     }
   }
@@ -107,7 +107,6 @@ const Navbar = class extends React.Component {
               >
                 About
               </Link>
-              {console.log(this.state)}
               <Link
                 className={
                   "navbar-item " +

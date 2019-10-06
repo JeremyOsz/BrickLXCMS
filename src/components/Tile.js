@@ -3,14 +3,14 @@ import styled from "styled-components";
 const Tile = styled.div`
     display: block;
     position: relative;
-    background: red;
     object-fit: cover;
     margin: 1rem 1%;
     border-radius: .5rem;
     overflow: hidden;
     width: 14.65%;
     padding-top: 14.65%;
-
+    bottom: 0;  
+      transition: all 0.15s ease;
     @media (max-width: 1550px) {
       width: 18%;
     padding-top: 18%;
@@ -23,6 +23,11 @@ const Tile = styled.div`
         width: 41%;
         padding-top: 41%;
         margin: 1rem 4%;font-size: 1.5em;
+    }
+
+    :hover{
+      box-shadow: 0px 0px 29px 10px #da000087;
+      bottom: 3px; 
     }
   > div {
     position: absolute !important;

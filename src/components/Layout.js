@@ -6,9 +6,15 @@ import SiteWrapper from "../components/SiteWrapper";
 import "./all.sass";
 import useSiteMetadata from "./SiteMetadata";
 import { withPrefix } from "gatsby";
+import { Link, graphql, StaticQuery } from "gatsby";
+import styled from "styled-components";
+
+import PropTypes from "prop-types";
 
 const TemplateWrapper = ({ children, page }) => {
+  // const { frontmatter } = data.markdownRemark;
   const { title, description } = useSiteMetadata();
+  // console.log(globalBackground());
   return (
     <SiteWrapper>
       <Helmet>
@@ -50,10 +56,74 @@ const TemplateWrapper = ({ children, page }) => {
         />
       </Helmet>
       <Navbar page={page} />
-      <div>{children}</div>
+      {/* <AboutPage1 /> */}
+      <PageContent>
+        <IndexPageBackground />
+        {children}
+      </PageContent>
       {/* <Footer /> */}
     </SiteWrapper>
   );
 };
 
 export default TemplateWrapper;
+
+const PageContent = styled.div`
+  position: relative;
+  height: 100vh;
+  overflow-y: auto;
+  /* @media (min-width: 1250px) {
+    padding-top: 3.25rem;
+  } */
+  @media screen and (max-width: 1023px) {
+    padding-top: 3.25rem;
+  }
+`;
+const Background = styled.div`
+  background: url(${props => (props.image ? props.image : "palevioletred")});
+  background-position: bottom right;
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+`;
+const IndexPageBackground = () => {
+  // const { frontmatter } = data.markdownRemark;
+
+  return (
+    <StaticQuery
+      query={graphql`
+        query IndexPageBackground {
+          markdownRemark(frontmatter: { templateKey: { eq: "index-page" } }) {
+            frontmatter {
+              image {
+                childImageSharp {
+                  fluid(maxWidth: 2048, quality: 100) {
+                    ...GatsbyImageSharpFluid
+                  }
+                }
+              }
+            }
+          }
+        }
+      `}
+      render={data => (
+        <Background
+          image={
+            data.markdownRemark.frontmatter.image.childImageSharp.fluid.src
+          }
+        />
+      )}
+    />
+  );
+};
+
+IndexPageBackground.propTypes = {
+  data: PropTypes.shape({
+    markdownRemark: PropTypes.shape({
+      frontmatter: PropTypes.object
+    })
+  })
+};

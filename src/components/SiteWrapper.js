@@ -27,7 +27,22 @@ const SiteWrapper = styled.div`
   min-height: 100vh;
   background-color: #000;
   color: #fff;
-
+  .column.is-10 {
+    margin: auto;
+  }
+  .button.is-link {
+    background-color: #ff0000ad;
+    border-color: transparent;
+    color: #fff;
+    font-family: "Amatic SC", "Lucida Sans", "Lucida Sans Regular",
+      "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    padding: 10px 29px;
+    line-height: 1;
+    height: auto;
+  }
   .navbar {
     background: #000;
     color: #fff;
@@ -46,7 +61,7 @@ const SiteWrapper = styled.div`
         padding: 5rem 0;
         font-size: 1.75rem;
       }
-      @media (max-width: 1024px) {
+      @media (max-width: 1023px) {
         margin-bottom: 6rem;
         font-size: 2.25rem;
       }
@@ -80,16 +95,10 @@ const SiteWrapper = styled.div`
       &:active {
         color: red;
         background: transparent;
-        @media (min-width: 1024px) {
-          background: #a0a0a054;
-        }
       }
       :hover {
-        color: red;
+        /* color: red; */
         background: transparent;
-        @media (min-width: 1024px) {
-          background: #a0a0a054;
-        }
       }
       img {
         max-height: 100%;
@@ -126,16 +135,25 @@ const SiteWrapper = styled.div`
       display: flex;
       flex: auto;
       color: inherit;
-
       text-align: center;
       justify-content: center;
       padding-right: 0;
+      :after {
+        position: absolute;
+        margin-top: 0.75em;
+        content: " ";
+        border-bottom: 1px solid white;
+        width: 0%;
+        transition: all 1s ease;
+      }
+      &.desktop:after {
+        border-bottom: none;
+      }
       :hover,
       :active {
         color: red;
-        background: transparent;
-        @media (min-width: 1024px) {
-          background: #a0a0a054;
+        :after {
+          width: 35%;
         }
       }
       img {

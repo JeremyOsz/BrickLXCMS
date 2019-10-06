@@ -28,7 +28,6 @@ export const ProjPostTemplate = ({
     slideClicked.contains("clicked")
       ? slideClicked.remove("clicked")
       : slideClicked.add("clicked");
-    console.log(slideClicked.contains("clicked"));
   };
   const PostContent = contentComponent || Content;
   const images = galleryImages
@@ -56,12 +55,10 @@ export const ProjPostTemplate = ({
 
   return (
     <section className="section">
-      {console.log(galleryImages)}
       {helmet || ""}
       <div className="container content">
         <div className="columns">
           <FalseModal class="falseModal">
-            {console.log(galleryImages)}
             <ImageGallery
               className={"image-gallery"}
               items={images}

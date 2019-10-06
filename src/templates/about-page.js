@@ -3,12 +3,30 @@ import PropTypes from "prop-types";
 import { graphql } from "gatsby";
 import Layout from "../components/Layout";
 import Content, { HTMLContent } from "../components/Content";
+import styled from "styled-components";
+
+const AboutBox = styled.div`
+  padding: 3rem 1.5rem;
+
+  &.section {
+    @media screen and (max-width: 1025px) {
+      padding: 1.5rem 1.5rem;
+    }
+  }
+
+  .section {
+    padding: 1rem 1.5rem;
+    background: #968e8e52;
+    border-radius: 0px;
+    box-shadow: -2px 4px 60px -2px #ff000066;
+  }
+`;
 
 export const AboutPageTemplate = ({ title, content, contentComponent }) => {
   const PageContent = contentComponent || Content;
 
   return (
-    <section className="section section--gradient">
+    <AboutBox className="section section--gradient">
       <div className="container">
         <div className="columns">
           <div className="column is-10 is-offset-1">
@@ -21,7 +39,7 @@ export const AboutPageTemplate = ({ title, content, contentComponent }) => {
           </div>
         </div>
       </div>
-    </section>
+    </AboutBox>
   );
 };
 

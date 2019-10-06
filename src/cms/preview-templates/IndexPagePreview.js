@@ -18,7 +18,7 @@ const PreviewStyles = styled.div`
   position: absolute;
   top: 20%;
   left: 20%;
-  @media (max-width: 1024px) {
+  @media (max-width: 1023px) {
     font-size: 0.85rem;
     top: 20%;
     left: 10%;
