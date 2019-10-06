@@ -107,6 +107,9 @@ const SiteWrapper = styled.div`
       min-width: 180px;
       border-right: 2px solid grey;
     }
+    .navbar > .container .navbar-menu {
+      margin-right: 0;
+    }
     .navbar-item {
       display: flex;
       flex: auto;
@@ -114,7 +117,9 @@ const SiteWrapper = styled.div`
 
       text-align: center;
       justify-content: center;
-      :hover {
+      padding-right: 0;
+      :hover,
+      :active {
         color: red;
       }
       img {

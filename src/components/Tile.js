@@ -1,16 +1,25 @@
 import styled from "styled-components";
 
 const Tile = styled.div`
-      display: block;
+    display: block;
     position: relative;
     background: red;
-    width: 22.5%;
     object-fit: cover;
-    padding-top: 22%;
     margin: 1rem 1%;
     border-radius: .5rem;
     overflow: hidden;
-    @media (max-width: 1025px) {
+    width: 14.65%;
+    padding-top: 14.65%;
+
+    @media (max-width: 1550px) {
+      width: 18%;
+    padding-top: 18%;
+    }
+    @media (max-width: 1150px) {
+      width: 23%;
+      padding-top: 23%;
+    }
+    @media (max-width: 720px) {
         width: 41%;
         padding-top: 41%;
         margin: 1rem 4%;font-size: 1.5em;

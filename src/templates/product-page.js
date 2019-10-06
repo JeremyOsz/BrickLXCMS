@@ -23,9 +23,9 @@ export const ProductPageTemplate = ({
   pricing
 }) => (
   <div className="content">
-    <div>
+    {/* <div>
       <Header className="has-text-weight-bold is-size-1">Projects</Header>
-    </div>
+    </div> */}
     <ProjRoll />
   </div>
 );
@@ -58,7 +58,7 @@ const ProductPage = ({ data }) => {
   const { frontmatter } = data.markdownRemark;
 
   return (
-    <Layout>
+    <Layout page="projects">
       <ProductPageTemplate
         image={frontmatter.image}
         title={frontmatter.title}

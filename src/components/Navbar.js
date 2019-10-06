@@ -28,6 +28,10 @@ const Logo = styled.img`
   }
 `;
 const NavBarStyled = styled.nav`
+  .active {
+    color: red;
+    background: #000fff;
+  }
   .navbar-item.desktop {
     @media (max-width: ${size.laptop}) {
       display: none;
@@ -39,7 +43,8 @@ const Navbar = class extends React.Component {
     super(props);
     this.state = {
       active: false,
-      navBarActiveClass: ""
+      navBarActiveClass: "",
+      activePage: props.page
     };
   }
 
@@ -96,7 +101,14 @@ const Navbar = class extends React.Component {
               <Link className="navbar-item" to="/about">
                 About
               </Link>
-              <Link className="navbar-item" to="/projects">
+              {console.log(this.state)}
+              <Link
+                className={
+                  "navbar-item " +
+                  (this.state.activePage === "projects" ? "active" : "")
+                }
+                to="/projects"
+              >
                 Projects
               </Link>
               {typeof window !== "undefined" ? (

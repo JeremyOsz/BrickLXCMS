@@ -11,7 +11,7 @@ const BlogRollStyled = styled.div`
   flex-wrap: wrap;
   flex-direction: row;
   @media (min-width: 1025px) {
-    padding-left: 2rem;
+    padding: 4rem 1rem;
   }
 `;
 

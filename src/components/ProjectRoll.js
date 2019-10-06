@@ -11,7 +11,7 @@ const ProjectRollStyled = styled.div`
   flex-wrap: wrap;
   flex-direction: row;
   @media (min-width: 1025px) {
-    padding-left: 2rem;
+    padding: 4rem 1rem;
   }
 `;
 
@@ -75,7 +75,7 @@ export default () => (
                 date(formatString: "MMMM DD, YYYY")
                 featuredimage {
                   childImageSharp {
-                    fluid(maxWidth: 120, quality: 100) {
+                    fluid(maxWidth: 420, quality: 80) {
                       ...GatsbyImageSharpFluid
                     }
                   }

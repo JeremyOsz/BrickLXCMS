@@ -9,9 +9,9 @@ export default class BlogIndexPage extends React.Component {
   render() {
     return (
       <Layout>
-        <div>
+        {/* <div>
           <Header className="has-text-weight-bold is-size-1">News</Header>
-        </div>
+        </div> */}
         <div className="content">
           <BlogRoll />
         </div>
