@@ -8,27 +8,7 @@ import Content, { HTMLContent } from "../components/Content";
 import styled from "styled-components";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/scss/image-gallery.scss";
-
-const FalseModal = styled.div`
-  height: 92vh;
-  overflow: auto;
-  width: 95%;
-  background-color: rgba(255, 255, 255, 0.2);
-  margin-left: 2rem;
-  box-shadow: -2px 4px 60px -2px #ff000050;
-  border-radius: 5px;
-
-  .image-gallery-left-nav,
-  .image-gallery-right-nav {
-    font-size: 2em;
-  }
-  .image-gallery-fullscreen-button:hover::before,
-  .image-gallery-play-button:hover::before,
-  .image-gallery-left-nav:hover::before,
-  .image-gallery-right-nav:hover::before {
-    color: red;
-  }
-`;
+import FalseModal from "../components/FalseModal";
 
 const PostCopy = styled.div`
   padding: 2rem;
@@ -43,12 +23,20 @@ export const ProjPostTemplate = ({
   title,
   helmet
 }) => {
+  const toggleDescription = e => {
+    let slideClicked = e.target.parentElement.parentElement.classList;
+    slideClicked.contains("clicked")
+      ? slideClicked.remove("clicked")
+      : slideClicked.add("clicked");
+    console.log(slideClicked.contains("clicked"));
+  };
   const PostContent = contentComponent || Content;
   const images = galleryImages
     ? galleryImages.map(img => {
         return {
-          original: img.image,
-          thumbnail: img.image
+          original: img.image.childImageSharp.fluid.src,
+          thumbnail: img.image.childImageSharp.fluid.src,
+          description: img.caption
         };
       })
     : [
@@ -75,9 +63,11 @@ export const ProjPostTemplate = ({
           <FalseModal class="falseModal">
             {console.log(galleryImages)}
             <ImageGallery
+              className={"image-gallery"}
               items={images}
               showPlayButton={false}
               autoPlay={false}
+              onClick={toggleDescription}
             />
             <div></div>
             <PostCopy>
@@ -120,7 +110,7 @@ const ProjPost = ({ data }) => {
   const { markdownRemark: post } = data;
 
   return (
-    <Layout>
+    <Layout page="projects">
       <ProjPostTemplate
         content={post.html}
         contentComponent={HTMLContent}

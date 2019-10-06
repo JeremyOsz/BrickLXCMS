@@ -8,7 +8,7 @@ import Header from "../../components/Header";
 export default class BlogIndexPage extends React.Component {
   render() {
     return (
-      <Layout>
+      <Layout page="news">
         {/* <div>
           <Header className="has-text-weight-bold is-size-1">News</Header>
         </div> */}

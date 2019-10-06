@@ -28,10 +28,10 @@ const Logo = styled.img`
   }
 `;
 const NavBarStyled = styled.nav`
-  .active {
+  /* .active {
     color: red;
-    background: #000fff;
-  }
+    background: #a0a0a054;
+  } */
   .navbar-item.desktop {
     @media (max-width: ${size.laptop}) {
       display: none;
@@ -71,18 +71,18 @@ const Navbar = class extends React.Component {
   render() {
     return (
       <NavBarStyled
-        className="navbar is-transparent"
+        className="navbar"
         role="navigation"
         aria-label="main-navigation"
       >
         <div className="container">
           <div className="navbar-brand">
             {/* Hamburger menu */}
-            {typeof window !== "undefined" && window.innerWidth <= 1024 ? (
+            {/* {typeof window !== "undefined" && window.innerWidth <= 1024 ? (
               <Link to="/" className="navbar-item" title="Logo">
                 <Logo src={logoMobile} alt="BrickLX" className="logo-mobile" />
               </Link>
-            ) : null}
+            ) : null} */}
             <div
               className={`navbar-burger burger ${this.state.navBarActiveClass}`}
               data-target="navMenu"
@@ -98,7 +98,13 @@ const Navbar = class extends React.Component {
             className={`navbar-menu ${this.state.navBarActiveClass}`}
           >
             <div className="navbar-start has-text-centered">
-              <Link className="navbar-item" to="/about">
+              <Link
+                className={
+                  "navbar-item " +
+                  (this.state.activePage === "about" ? "active" : "")
+                }
+                to="/about"
+              >
                 About
               </Link>
               {console.log(this.state)}
@@ -117,10 +123,22 @@ const Navbar = class extends React.Component {
                 </Link>
               ) : null}
 
-              <Link className="navbar-item" to="/blog">
+              <Link
+                className={
+                  "navbar-item " +
+                  (this.state.activePage === "news" ? "active" : "")
+                }
+                to="/blog"
+              >
                 News
               </Link>
-              <Link className="navbar-item" to="/contact">
+              <Link
+                className={
+                  "navbar-item " +
+                  (this.state.activePage === "contact" ? "active" : "")
+                }
+                to="/contact"
+              >
                 Contact
               </Link>
             </div>

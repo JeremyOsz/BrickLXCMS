@@ -76,8 +76,20 @@ const SiteWrapper = styled.div`
       font-weight: 600;
       color: #fff;
       text-align: center;
+      &.active,
+      &:active {
+        color: red;
+        background: transparent;
+        @media (min-width: 1024px) {
+          background: #a0a0a054;
+        }
+      }
       :hover {
         color: red;
+        background: transparent;
+        @media (min-width: 1024px) {
+          background: #a0a0a054;
+        }
       }
       img {
         max-height: 100%;
@@ -121,6 +133,10 @@ const SiteWrapper = styled.div`
       :hover,
       :active {
         color: red;
+        background: transparent;
+        @media (min-width: 1024px) {
+          background: #a0a0a054;
+        }
       }
       img {
         max-height: 100%;
