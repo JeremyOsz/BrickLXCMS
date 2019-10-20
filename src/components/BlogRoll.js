@@ -5,7 +5,7 @@ import { Link, graphql, StaticQuery } from "gatsby";
 import PreviewCompatibleImage from "./PreviewCompatibleImage";
 import styled from "styled-components";
 import Blog from "./Tile";
-import fetch from "cross-fetch";
+import fetch from "node-fetch";
 
 const BlogRollStyled = styled.div`
   display: flex;
