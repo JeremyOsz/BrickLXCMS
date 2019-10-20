@@ -55,7 +55,7 @@ class BlogRoll extends React.Component {
     });
   }
   getInstaPosts() {
-    const API_KEY = process.env.APIKEY_Instagram; // Get API Key from env variables
+    const API_KEY = process.env.GATSBY_APIKEY_Instagram; // Get API Key from env variables
 
     console.log(API_KEY);
     // Fetch from Instagram using API key and Count
