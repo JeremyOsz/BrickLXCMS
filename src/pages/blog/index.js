@@ -2,7 +2,6 @@ import React from "react";
 
 import Layout from "../../components/Layout";
 import BlogRoll from "../../components/BlogRoll";
-
 import Header from "../../components/Header";
 
 export default class BlogIndexPage extends React.Component {

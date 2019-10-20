@@ -8,6 +8,9 @@ const FalseModal = styled.div`
   margin-left: 2rem;
   box-shadow: -2px 4px 60px -2px #ff000050;
   border-radius: 5px;
+  @media (  -width: 1025px) {
+    margin: auto;
+  }
 
   .image-gallery-left-nav,
   .image-gallery-right-nav {
