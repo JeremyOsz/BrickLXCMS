@@ -57,6 +57,7 @@ class BlogRoll extends React.Component {
   getInstaPosts() {
     const API_KEY = process.env.APIKEY_Instagram; // Get API Key from env variables
 
+    console.log(API_KEY);
     // Fetch from Instagram using API key and Count
     fetch(
       `https://api.instagram.com/v1/users/self/media/recent/?access_token=${API_KEY}`
