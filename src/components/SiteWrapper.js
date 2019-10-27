@@ -3,26 +3,6 @@ import styled from "styled-components";
 
 const SiteWrapper = styled.div`
   @import url("https://fonts.googleapis.com/css?family=Amatic+SC|Open+Sans&display=swap");
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  .content h1,
-  .content h2,
-  .content h3,
-  .content h4,
-  .content h5,
-  .content h6 {
-    font-family: "Amatic SC", Arial, Helvetica, sans-serif;
-    color: #fff;
-  }
-  .content,
-  .label {
-    font-family: "Open Sans", Arial, Helvetica, sans-serif;
-    color: #fff;
-  }
 
   min-height: 100vh;
   background-color: #000;

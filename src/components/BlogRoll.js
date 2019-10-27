@@ -6,6 +6,8 @@ import PreviewCompatibleImage from "./PreviewCompatibleImage";
 import styled from "styled-components";
 import Blog from "./Tile";
 import fetch from "node-fetch";
+import BlogModal from "./BlogModal";
+import Modal from "react-modal";
 
 const BlogRollStyled = styled.div`
   display: flex;
@@ -21,8 +23,34 @@ const BlogRollStyled = styled.div`
     padding: 2rem 2rem;
   }
 `;
-
+Modal.setAppElement("#___gatsby");
 class BlogRoll extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      modalData: "https://www.w3schools.com",
+      modalIsOpen: false
+    };
+
+    this.openModal = this.openModal.bind(this);
+    this.afterOpenModal = this.afterOpenModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  openModal() {
+    this.setState({ modalIsOpen: true });
+  }
+
+  afterOpenModal() {
+    // references are now sync'd and can be accessed.
+  }
+
+  closeModal() {
+    this.setState({ modalIsOpen: false });
+  }
+
   generateBlogRoll() {
     const instagramPosts = this.state.instagram_posts
       ? this.state.instagram_posts
@@ -48,7 +76,8 @@ class BlogRoll extends React.Component {
               alt: `featured image thumbnail for post ${post.title}`,
               title: post.frontmatter.title,
               date: date,
-              slug: post.fields.slug
+              slug: post.fields.slug,
+              fullpost: post
             };
           })
         : null
@@ -57,7 +86,6 @@ class BlogRoll extends React.Component {
   getInstaPosts() {
     const API_KEY = process.env.GATSBY_APIKEY_Instagram; // Get API Key from env variables
 
-    console.log(API_KEY);
     // Fetch from Instagram using API key and Count
     fetch(
       `https://api.instagram.com/v1/users/self/media/recent/?access_token=${API_KEY}`
@@ -70,7 +98,22 @@ class BlogRoll extends React.Component {
             return {
               type: "instagram",
               id: image.id,
-              image: image.images.standard_resolution.url,
+              image: image.carousel_media
+                ? image.carousel_media.map(i => {
+                    return {
+                      original: i.images.standard_resolution.url,
+                      thumbnail: i.images.thumbnail.url,
+                      description: image.caption ? image.caption.text : null
+                    };
+                  })
+                : [
+                    {
+                      original: image.images.standard_resolution.url,
+                      thumbnail: image.images.thumbnail.url,
+                      description: image.caption ? image.caption.text : null
+                    }
+                  ],
+              thumbnail: image.images.standard_resolution,
               alt: date,
               title: date,
               date: date,
@@ -79,7 +122,14 @@ class BlogRoll extends React.Component {
           })
         });
       })
-      .catch(e => console.log(e));
+      .catch(e => console.error(new Error(e)));
+  }
+  handleClick(e, link) {
+    e.preventDefault();
+    this.setState({
+      modalData: link
+    });
+    this.openModal();
   }
   componentWillMount() {
     this.getInstaPosts();
@@ -91,52 +141,51 @@ class BlogRoll extends React.Component {
     const OrderedPosts = this.generateBlogRoll();
 
     return (
-      <BlogRollStyled>
+      <BlogRollStyled id="BlogRoll">
         {OrderedPosts.map(post => {
           return (
-            <Blog key={post.id}>
-              <div>
-                {console.log(post)}
-                {post.type === "CMS" ? (
-                  <Link to={post.slug}>
-                    <PreviewCompatibleImage
-                      imageInfo={{
-                        image: post.image,
-                        alt: `featured image thumbnail for post ${post.alt}`
-                      }}
-                    />
-                    <h1>{post.title}</h1>
-                  </Link>
-                ) : (
-                  <a href={post.slug}>
-                    <PreviewCompatibleImage
-                      imageInfo={{
-                        image: post.image,
-                        alt: `featured image thumbnail for post ${post.alt}`
-                      }}
-                    />
-                    <h1>{post.title.toString().slice(0, 10) + "..."}</h1>
-                  </a>
-                )}
-              </div>
-            </Blog>
+            <>
+              <Blog key={post.id}>
+                <div>
+                  {post.type === "CMS" ? (
+                    <Link
+                      onClick={e => this.handleClick(e, post)}
+                      to={post.slug}
+                    >
+                      <PreviewCompatibleImage
+                        imageInfo={{
+                          image: post.image,
+                          alt: `featured image thumbnail for post ${post.alt}`
+                        }}
+                      />
+                      <h1>{post.title}</h1>
+                    </Link>
+                  ) : (
+                    <a onClick={e => this.handleClick(e, post)} to={post.slug}>
+                      <PreviewCompatibleImage
+                        imageInfo={{
+                          image: post.thumbnail.url,
+                          alt: `featured image thumbnail for post ${post.alt}`
+                        }}
+                      />
+                      <h1>{post.title.toString().slice(0, 10) + "..."}</h1>
+                    </a>
+                  )}
+                </div>
+              </Blog>
+              <Modal
+                isOpen={this.state.modalIsOpen}
+                onAfterOpen={this.afterOpenModal}
+                onRequestClose={this.closeModal}
+                contentLabel="Example Modal"
+                className="Modal"
+                overlayClassName="Overlay"
+              >
+                <BlogModal {...this.state.modalData}></BlogModal>
+              </Modal>
+            </>
           );
         })}
-        {/* <Blog key={post.id}>
-                <div>
-                  <Link to={post.slug}>
-                    <PreviewCompatibleImage
-                      imageInfo={{
-                        image: post.image.childImageSharp
-                          ? post.image.childImageSharp.fluid.src
-                          : post.image,
-                        alt: `featured image thumbnail for post ${post.alt}`
-                      }}
-                    />
-                    <h1>{post.title}</h1>
-                  </Link>
-                </div>
-              </Blog> */}
       </BlogRollStyled>
     );
   }
@@ -165,17 +214,30 @@ export default () => (
               fields {
                 slug
               }
+              html
               frontmatter {
                 title
                 templateKey
                 date(formatString: "MMMM DD, YYYY")
                 featuredpost
+                description
+                tags
                 featuredimage {
                   childImageSharp {
                     fluid(maxWidth: 120, quality: 100) {
                       ...GatsbyImageSharpFluid
                     }
                   }
+                }
+                galleryImages {
+                  image {
+                    childImageSharp {
+                      fluid(maxWidth: 1226, quality: 92) {
+                        ...GatsbyImageSharpFluid
+                      }
+                    }
+                  }
+                  caption
                 }
               }
             }

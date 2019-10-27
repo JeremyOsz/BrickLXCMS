@@ -3,15 +3,19 @@ import styled from "styled-components";
 const FalseModal = styled.div`
   height: 92vh;
   overflow: auto;
-  width: 95%;
+  /* width: 95%; */
   background-color: #333333;
-  margin-left: 2rem;
-  box-shadow: -2px 4px 60px -2px #ff000050;
+  /* margin-left: 2rem; */
+  /* box-shadow: -2px 4px 60px -2px #ff000050; */
   border-radius: 5px;
-  @media (  -width: 1025px) {
+  /* font-family: "Amatic SC",Arial,Helvetica,sans-serif; */
+    color: #fff;
+  @media (max-width: 1025px) {
     margin: auto;
   }
-
+  *{
+    color: #fff;
+  }
   .image-gallery-left-nav,
   .image-gallery-right-nav {
     font-size: 2em;
